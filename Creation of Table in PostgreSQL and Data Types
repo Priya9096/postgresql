@@ -1,23 +1,40 @@
-*Creation of Table in PostgreSQL and Data Types:
-
-create type gender_type as enum('Male','Female');
-
 create table emp(
 emp_id serial primary key,
-emp_name Text,
-is_married boolean,
+emp_name Text not null,
+is_married boolean default true,
 dob date,
 created_at timestamp,
 profile_data json
 );
 
-insert into emp (emp_name,is_married,dob,created_at,profile_data) values
-('Ak',TRUE,'1998-02-12','1998-02-12 12:12:12','{"hobby":"cricket"}');
+INSERT INTO EMP 
+(emp_name,is_married,dob,created_at,profile_data) values
+('Akash',true,'1998-02-12','2025-05-23 12:12:12','{"hobby":"cricket"}'),
+('Pooja',false,'1998-02-12','2025-05-23 12:12:12','{"hobby":"fooball"}');
 
-alter table emp add column gender gender_type;
+Insert into Emp 
+(emp_name,dob,created_at,profile_data) values
+('Neha','1998-02-12','2025-05-23 12:12:12','{"hobby":"indoor games"}');
+select * from EMP;
 
-insert into emp (emp_name,is_married,dob,created_at,profile_data,gender) values
-('Ak',TRUE,'1998-02-12','1998-02-12 12:12:12','{"hobby":"cricket"}','Male');
+create table dep(
+dep_id int,
+dep_name Text
+);
+
+insert into dep values(101,'Sales'),(102,'Dev');
+select * from dep;
+
+create table emp_dep (
+emp_id int,
+dep_id int,
+FOREIGN KEY (emp_id) REFERENCES emp(emp_id),
+FOREIGN KEY (dep_id) REFERENCES dep(dep_id)
+);
+
+insert into emp_dep (emp_id,dep_id) values(1,101);
 
 
-select * from emp;
+
+
+
