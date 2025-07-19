@@ -1,0 +1,45 @@
+Constraints:
+1.Primay key, Unique, Foreign key, not null, default
+
+create table emp(
+emp_id serial primary key,
+emp_name Text,
+is_married boolean,
+dob date,
+created_at timestamp,
+profile_data json
+);
+
+insert into emp (emp_name,is_married,dob,created_at,profile_data) values
+('Ak',TRUE,'1998-02-12','1998-02-12 12:12:12','{"hobby":"cricket"}');
+insert into emp (emp_name,is_married,dob,created_at,profile_data) values
+('Pk',TRUE,'1998-02-12','1998-02-12 12:12:12','{"hobby":"Reading"}');
+
+create table designation(
+des_id serial primary key,
+des_name text not null
+);
+
+insert into designation values (102,'Dev');
+
+create table emp_desig(
+emp_id int,
+des_id int,
+foreign key (emp_id) references emp(emp_id),
+foreign key (des_id) references designation(des_id)
+);
+
+insert into emp_desig values(1,102);
+
+
+--Default Constraints:
+create table sample(
+name text,
+city text default 'Pune');
+
+insert into sample (name) values('Priya');
+
+select * from sample;
+
+
+
