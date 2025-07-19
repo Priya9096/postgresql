@@ -18,7 +18,7 @@ Insert into Emp
 select * from EMP;
 
 create table dep(
-dep_id int,
+dep_id int primary key,
 dep_name Text
 );
 
@@ -33,6 +33,8 @@ FOREIGN KEY (dep_id) REFERENCES dep(dep_id)
 );
 
 insert into emp_dep (emp_id,dep_id) values(1,101);
+
+select * from emp_dep;
 
 
 
