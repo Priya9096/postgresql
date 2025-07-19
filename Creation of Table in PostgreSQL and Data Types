@@ -1,0 +1,23 @@
+*Creation of Table in PostgreSQL and Data Types:
+
+create type gender_type as enum('Male','Female');
+
+create table emp(
+emp_id serial primary key,
+emp_name Text,
+is_married boolean,
+dob date,
+created_at timestamp,
+profile_data json
+);
+
+insert into emp (emp_name,is_married,dob,created_at,profile_data) values
+('Ak',TRUE,'1998-02-12','1998-02-12 12:12:12','{"hobby":"cricket"}');
+
+alter table emp add column gender gender_type;
+
+insert into emp (emp_name,is_married,dob,created_at,profile_data,gender) values
+('Ak',TRUE,'1998-02-12','1998-02-12 12:12:12','{"hobby":"cricket"}','Male');
+
+
+select * from emp;
