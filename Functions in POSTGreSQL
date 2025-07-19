@@ -1,0 +1,30 @@
+Function in POSTGreSQL
+
+🔸 1. CURRENT_DATE, CURRENT_TIME, NOW()
+SELECT CURRENT_DATE, CURRENT_TIME, NOW();
+
+🔸 2. AGE() – calculate age or difference
+SELECT age(now(),'1998-02-16');
+
+🔸 3. EXTRACT() – pull parts from date/time
+SELECT EXTRACT(YEAR FROM age(now(),'1998-02-16'));
+
+🔸 4. TO_CHAR() – convert to formatted string
+SELECT 
+  TO_CHAR('1998-02-12'::date, 'MM-DD-YYYY') AS dob_formatted;
+
+🔸 6. Interval Arithmetic – Add or Subtract Time
+SELECT '1998-02-12'::date + INTERVAL '30 years' AS dob_formatted;
+
+✅ Combine with Control Flow
+1.SELECT 
+  CASE 
+    WHEN 92 >= 90 THEN 'Grade A'
+    WHEN 92 >= 80 THEN 'Grade B'
+    WHEN 92 >= 70 THEN 'Grade C'
+    ELSE 'Fail'
+  END AS grade;
+
+2.SELECT COALESCE(NULL, NULL, 'Hello', 'World') AS result;
+
+3.SELECT NULLIF(100, 10) AS result1;
