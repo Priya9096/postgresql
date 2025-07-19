@@ -1,0 +1,53 @@
+✅ Step 1: Create a Small Table
+CREATE TABLE demo (
+    id INTEGER,
+    name TEXT,
+    age INTEGER,
+    score REAL
+);
+✅ Step 2: Insert Few Rows
+INSERT INTO demo VALUES (1, 'Ankit', 22, 85.5);
+INSERT INTO demo VALUES (2, 'Ravi', 25, 92.0);
+INSERT INTO demo VALUES (3, 'Neha', 19, 76.2);
+INSERT INTO demo VALUES (4, 'Sara', 22, 60.0);
+INSERT INTO demo VALUES (5, 'Ankit', 30, 85.5);
+
+✅ Step 3: Use All Common SQLite Operators
+🔹 Comparison Operators
+SELECT * FROM demo WHERE age = 22;      -- equal to
+SELECT * FROM demo WHERE score != 85.5; -- not equal
+SELECT * FROM demo WHERE age > 20;      -- greater than
+SELECT * FROM demo WHERE age < 25;      -- less than
+SELECT * FROM demo WHERE age BETWEEN 20 AND 25;
+SELECT * FROM demo WHERE name IN ('Ankit', 'Sara');
+
+🔹 Logical Operators
+SELECT * FROM demo WHERE age > 20 AND score > 80;
+SELECT * FROM demo WHERE name = 'Ankit' OR age < 20;
+SELECT * FROM demo WHERE NOT age = 22;
+
+🔹 LIKE Operator (Pattern Matching)
+SELECT * FROM demo WHERE name LIKE 'A%';   -- starts with A
+SELECT * FROM demo WHERE name LIKE '%a';   -- ends with a
+SELECT * FROM demo WHERE name LIKE '%n%';  -- contains 'n'
+
+🔹 IS NULL / IS NOT NULL
+-- Add a nullable column for this test
+ALTER TABLE demo ADD COLUMN city TEXT;
+
+UPDATE demo SET city = 'Delhi' WHERE id = 1;
+-- Others will stay NULL
+
+SELECT * FROM demo WHERE city IS NULL;
+SELECT * FROM demo WHERE city IS NOT NULL;
+
+🔹 Arithmetic Operators
+SELECT name, score + 5 AS bonus_score FROM demo;
+SELECT name, age * 2 AS double_age FROM demo;
+SELECT name, score / 2 AS half_score FROM demo;
+
+🔹 Between and Logical AND Operators Example
+SELECT DISTINCT name FROM demo
+WHERE 
+age BETWEEN 20 AND 30
+AND score > 80;
