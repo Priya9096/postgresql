@@ -1,0 +1,60 @@
+Group by, Order by + Having
+
+🧱 Table : sales_data
+CREATE TABLE sales_data (
+    sale_id SERIAL PRIMARY KEY,
+    employee_name TEXT,
+    region TEXT,
+    product TEXT,
+    units_sold INT,
+    revenue NUMERIC
+);
+
+✅ Insert Sample Data
+INSERT INTO sales_data (employee_name, region, product, units_sold, revenue) VALUES
+('Ankit', 'North', 'Laptop', 10, 50000),
+('Ankit', 'North', 'Mobile', 5, 15000),
+('Neha',  'South', 'Laptop', 7, 42000),
+('Ravi',  'North', 'Tablet', 3, 9000),
+('Neha',  'South', 'Mobile', 10, 20000),
+('Ravi',  'West',  'Laptop', 8, 48000),
+('Sara',  'West',  'Mobile', 6, 12000),
+('Sara',  'East',  'Laptop', 4, 24000),
+('Ankit', 'North', 'Tablet', 2, 5000),
+('Neha',  'South', 'Tablet', 1, 3000);
+
+
+🟢 Questions
+Q1. Get all sales made by Ankit.
+SELECT * FROM sales_data
+WHERE employee_name = 'Ankit';
+
+Q2. Get names of employees who sold Mobile products.
+SELECT DISTINCT employee_name
+FROM sales_data
+WHERE product = 'Mobile';
+
+Q3. Get total revenue earned by each employee (no filters).
+SELECT employee_name, SUM(revenue) AS total_revenue
+FROM sales_data
+GROUP BY employee_name;
+
+🟡 Question
+Q4. Get total units sold by each employee in the South region only.
+SELECT employee_name, SUM(units_sold) AS total_units
+FROM sales_data
+WHERE region = 'South'
+GROUP BY employee_name;
+
+🔴 Question
+Q5. Get the total revenue by each employee (only for North and South), only include those with total revenue > 20000, sort by highest revenue, show 2nd and 3rd top employees.
+
+SELECT 
+  employee_name,
+  SUM(revenue) AS total_revenue
+FROM sales_data
+WHERE region IN ('North', 'South')
+GROUP BY employee_name
+HAVING SUM(revenue) > 20000
+ORDER BY total_revenue DESC
+LIMIT 2 OFFSET 1;
